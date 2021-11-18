@@ -51,7 +51,13 @@ android {
 }
 
 dependencies {
+    def retrofit = '2.9.0'
+    def okhttp = '4.9.2'
     def appcompat = '1.4.0'
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
 
     implementation "androidx.appcompat:appcompat:$appcompat"
     implementation "androidx.activity:activity-compose:$appcompat"
