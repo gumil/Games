@@ -1,0 +1,81 @@
+[
+  {
+    "id": 134161,
+    "cover": {
+      "id": 197908,
+      "image_id": "co48pg"
+    },
+    "first_release_date": 1637020800,
+    "game_engines": [
+      {
+        "id": 6,
+        "name": "Unreal Engine"
+      }
+    ],
+    "game_modes": [
+      {
+        "id": 1,
+        "name": "Single player"
+      }
+    ],
+    "genres": [
+      {
+        "id": 9,
+        "name": "Puzzle"
+      },
+      {
+        "id": 31,
+        "name": "Adventure"
+      }
+    ],
+    "involved_companies": [
+      {
+        "id": 99872,
+        "company": {
+          "id": 2410,
+          "name": "lorem"
+        }
+      }
+    ],
+    "name": "The lorem game",
+    "platforms": [
+      {
+        "id": 6,
+        "name": "PC (Microsoft Windows)",
+        "platform_logo": {
+          "id": 203,
+          "image_id": "irwvwpl023f8y19tidgq"
+        }
+      }
+    ],
+    "player_perspectives": [
+      {
+        "id": 2,
+        "name": "Third person"
+      }
+    ],
+    "screenshots": [
+      {
+        "id": 552555,
+        "image_id": "scbucr"
+      }
+    ],
+    "storyline": "Lorem ipsum dolor sit amet.",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "themes": [
+      {
+        "id": 38,
+        "name": "Open world"
+      }
+    ],
+    "total_rating": 88.8,
+    "url": "https://www.igdb.com/games/lorem",
+    "videos": [
+      {
+        "id": 50700,
+        "name": "Trailer",
+        "video_id": "UKuSbg2o7Q8"
+      }
+    ]
+  }
+]
