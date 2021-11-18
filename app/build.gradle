@@ -7,6 +7,9 @@ plugins {
 def detektVersion = '1.19.0-RC1'
 def composeVersion = '1.0.5'
 
+def properties = new Properties()
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
 android {
     compileSdk 31
 
@@ -21,6 +24,9 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField 'String', 'CLIENT_ID', "\"${properties.getProperty("clientId")}\""
+        buildConfigField 'String', 'TOKEN', "\"${properties.getProperty("token")}\""
     }
 
     buildTypes {
