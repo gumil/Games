@@ -1,42 +1,64 @@
 package dev.gumil.games.data
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+@Entity
 @JsonClass(generateAdapter = true)
 data class Game(
+    @PrimaryKey
     @Json(name = "id")
     val id: Int,
+
+    @Embedded(prefix = "cover")
     @Json(name = "cover")
     val cover: GameImage,
+
     @Json(name = "first_release_date")
-    val firstReleaseDate: Int,
+    val firstReleaseDate: Long,
+
     @Json(name = "game_modes")
     val gameModes: List<FieldName>,
+
     @Json(name = "game_engines")
     val gameEngines: List<FieldName>,
+
     @Json(name = "genres")
     val genres: List<FieldName>,
+
     @Json(name = "involved_companies")
     val involvedCompanies: List<InvolvedCompany>,
+
     @Json(name = "name")
     val name: String,
+
     @Json(name = "platforms")
     val platforms: List<GamePlatform>,
+
     @Json(name = "player_perspectives")
     val playerPerspectives: List<FieldName>,
+
     @Json(name = "screenshots")
     val screenshots: List<GameImage>,
+
     @Json(name = "storyline")
     val storyline: String,
+
     @Json(name = "summary")
     val summary: String,
+
     @Json(name = "themes")
     val themes: List<FieldName>,
+
     @Json(name = "total_rating")
     val totalRating: Double,
+
     @Json(name = "url")
     val url: String,
+
     @Json(name = "videos")
     val videos: List<GameVideo>
 )
