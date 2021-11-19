@@ -34,6 +34,18 @@ class GameDaoTest {
     }
 
     @Test
+    fun inserting_an_empty_list_does_nothing() = runBlocking {
+        val game = game()
+        val expected = listOf(game)
+
+        gameDao.insert(listOf(game))
+        gameDao.insert(emptyList())
+        val actual = gameDao.getAllGames()
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun insert_a_game_with_nullable_fields() = runBlocking {
         val game = game().copy(
             storyline = null,
