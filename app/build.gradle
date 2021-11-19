@@ -110,6 +110,7 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
     androidTestImplementation "androidx.room:room-testing:$room"
     androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$mockito"
+    androidTestImplementation "org.mockito:mockito-android:$mockito"
 
     debugImplementation "androidx.compose.ui:ui-tooling:$composeVersion"
 
