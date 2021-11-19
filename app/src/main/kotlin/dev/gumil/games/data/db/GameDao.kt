@@ -20,4 +20,7 @@ interface GameDao {
 
     @Query("SELECT * FROM game")
     fun getPagedGames(): PagingSource<Int, Game>
+
+    @Query("SELECT * FROM game WHERE id = :id")
+    suspend fun getGame(id: String): Game
 }

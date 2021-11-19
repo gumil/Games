@@ -10,6 +10,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import kotlin.random.Random
 
 class GameDaoTest {
     private val context = ApplicationProvider.getApplicationContext<Context>()
@@ -132,6 +133,17 @@ class GameDaoTest {
         )
 
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun insert_a_game_and_get_game_by_id() = runBlocking {
+        val id = Random.nextInt()
+        val game = game(id)
+
+        gameDao.insert(listOf(game(), game, game(), game()))
+        val actual = gameDao.getGame(id.toString())
+
+        assertEquals(game, actual)
     }
 
     @After
