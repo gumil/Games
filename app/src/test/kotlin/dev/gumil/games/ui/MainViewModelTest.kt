@@ -36,15 +36,16 @@ class MainViewModelTest {
     @Test
     fun `games flow emits PagingData of games`() = runBlockingTest(testDispatcher) {
         val games = (0..5).map { Game() }
+        val expected = games.map { it.mapToListModel() }
         val flow = flowOf(PagingData.from(games))
         whenever(repository.getPagedPopularGamesFlow()).thenReturn(flow)
 
-        val diffCallback = object : DiffUtil.ItemCallback<Game>() {
-            override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
+        val diffCallback = object : DiffUtil.ItemCallback<GameListUiModel>() {
+            override fun areItemsTheSame(oldItem: GameListUiModel, newItem: GameListUiModel): Boolean {
                 return false
             }
 
-            override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
+            override fun areContentsTheSame(oldItem: GameListUiModel, newItem: GameListUiModel): Boolean {
                 return false
             }
         }
@@ -79,7 +80,7 @@ class MainViewModelTest {
 
         advanceUntilIdle()
 
-        assertEquals(games, differ.snapshot().toList())
+        assertEquals(expected, differ.snapshot().toList())
 
         job.cancel()
     }
