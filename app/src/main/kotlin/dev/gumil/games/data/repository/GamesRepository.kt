@@ -4,10 +4,12 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import dagger.hilt.android.scopes.ViewModelScoped
 import dev.gumil.games.data.Game
 import dev.gumil.games.data.db.IgdbDatabase
 import dev.gumil.games.data.network.IgdbApi
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 interface GamesRepository {
     fun getPagedPopularGamesFlow(): Flow<PagingData<Game>>
@@ -15,7 +17,8 @@ interface GamesRepository {
 }
 
 @OptIn(ExperimentalPagingApi::class)
-class GamesRepositoryImpl(
+@ViewModelScoped
+class GamesRepositoryImpl @Inject constructor(
     private val db: IgdbDatabase,
     private val api: IgdbApi
 ) : GamesRepository {
