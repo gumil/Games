@@ -34,6 +34,25 @@ class GameDaoTest {
     }
 
     @Test
+    fun insert_a_game_with_nullable_fields() = runBlocking {
+        val game = game().copy(
+            storyline = null,
+            themes = null,
+            gameModes = null,
+            gameEngines = null,
+            involvedCompanies = null,
+            playerPerspectives = null,
+            videos = null
+        )
+        val expected = listOf(game)
+
+        gameDao.insert(listOf(game))
+        val actual = gameDao.getAllGames()
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun insert_game_list_and_replace_duplicate_games() = runBlocking {
         val game = game()
         val expected = listOf(game)

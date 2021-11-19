@@ -77,5 +77,43 @@
         "video_id": "UKuSbg2o7Q8"
       }
     ]
+  },
+  {
+    "id": 134161,
+    "cover": {
+      "id": 197908,
+      "image_id": "co48pg"
+    },
+    "first_release_date": 1637020800,
+    "genres": [
+      {
+        "id": 9,
+        "name": "Puzzle"
+      },
+      {
+        "id": 31,
+        "name": "Adventure"
+      }
+    ],
+    "name": "The lorem game",
+    "platforms": [
+      {
+        "id": 6,
+        "name": "PC (Microsoft Windows)",
+        "platform_logo": {
+          "id": 203,
+          "image_id": "irwvwpl023f8y19tidgq"
+        }
+      }
+    ],
+    "screenshots": [
+      {
+        "id": 552555,
+        "image_id": "scbucr"
+      }
+    ],
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "total_rating": 88.8,
+    "url": "https://www.igdb.com/games/lorem"
   }
 ]

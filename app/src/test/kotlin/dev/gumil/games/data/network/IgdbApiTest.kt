@@ -23,65 +23,78 @@ class IgdbApiTest {
     fun `getGames returns a list of games`() = runBlocking {
         mockServer.enqueue(mockResponseFrom("getPopularGames.json"))
 
-        val game = Game(
-            id = 134161,
-            cover = GameImage(
-                imageId = "co48pg"
-            ),
-            firstReleaseDate = 1637020800,
-            gameEngines = listOf(
-                FieldName("Unreal Engine")
-            ),
-            gameModes = listOf(
-                FieldName("Single player")
-            ),
-            genres = listOf(
-                FieldName("Puzzle"),
-                FieldName("Adventure")
-            ),
-            involvedCompanies = listOf(
-                InvolvedCompany(
-                    company = FieldName("lorem")
-                )
-            ),
-            name = "The lorem game",
-            platforms = listOf(
-                GamePlatform(
-                    name = "PC (Microsoft Windows)",
-                    platformLogo = GameImage(
-                        imageId = "irwvwpl023f8y19tidgq"
-                    )
-                )
-            ),
-            playerPerspectives = listOf(
-                FieldName("Third person")
-            ),
-            screenshots = listOf(
-                GameImage(
-                    imageId = "scbucr"
-                )
-            ),
-            storyline = "Lorem ipsum dolor sit amet.",
-            summary = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            themes = listOf(
-                FieldName("Open world")
-            ),
-            totalRating = 88.8,
-            url = "https://www.igdb.com/games/lorem",
-            videos = listOf(
-                GameVideo(
-                    name = "Trailer",
-                    videoId = "UKuSbg2o7Q8"
-                )
+        val game = game()
+
+        val expected = listOf(
+            game,
+            game.copy(
+                storyline = null,
+                themes = null,
+                gameModes = null,
+                gameEngines = null,
+                involvedCompanies = null,
+                playerPerspectives = null,
+                videos = null
             )
         )
-
-        val expected = listOf(game)
 
         val actual = api.getGames("${Random.nextInt()}".toRequestBody())
 
         assertEquals(expected, actual)
     }
+
+    private fun game() = Game(
+        id = 134161,
+        cover = GameImage(
+            imageId = "co48pg"
+        ),
+        firstReleaseDate = 1637020800,
+        gameEngines = listOf(
+            FieldName("Unreal Engine")
+        ),
+        gameModes = listOf(
+            FieldName("Single player")
+        ),
+        genres = listOf(
+            FieldName("Puzzle"),
+            FieldName("Adventure")
+        ),
+        involvedCompanies = listOf(
+            InvolvedCompany(
+                company = FieldName("lorem")
+            )
+        ),
+        name = "The lorem game",
+        platforms = listOf(
+            GamePlatform(
+                name = "PC (Microsoft Windows)",
+                platformLogo = GameImage(
+                    imageId = "irwvwpl023f8y19tidgq"
+                )
+            )
+        ),
+        playerPerspectives = listOf(
+            FieldName("Third person")
+        ),
+        screenshots = listOf(
+            GameImage(
+                imageId = "scbucr"
+            )
+        ),
+        storyline = "Lorem ipsum dolor sit amet.",
+        summary = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        themes = listOf(
+            FieldName("Open world")
+        ),
+        totalRating = 88.8,
+        url = "https://www.igdb.com/games/lorem",
+        videos = listOf(
+            GameVideo(
+                name = "Trailer",
+                videoId = "UKuSbg2o7Q8"
+            )
+        )
+    )
 
     @After
     fun tearDown() {
