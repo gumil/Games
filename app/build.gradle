@@ -99,6 +99,8 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$rootProject.ext.hiltVersion"
     kapt "com.google.dagger:hilt-compiler:$rootProject.ext.hiltVersion"
 
+    implementation "io.coil-kt:coil-compose:1.4.0"
+
     implementation "androidx.appcompat:appcompat:$appcompat"
     implementation "androidx.activity:activity-compose:$appcompat"
     implementation 'com.google.android.material:material:1.4.0'

@@ -1,8 +1,6 @@
 package dev.gumil.games.ui
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
@@ -10,17 +8,15 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
-import dev.gumil.games.data.Game
+import dev.gumil.games.ui.list.GameListItem
 import kotlinx.coroutines.flow.Flow
 
 @Composable
-fun GamesList(pager: Flow<PagingData<Game>>) {
+fun GamesList(pager: Flow<PagingData<GameListUiModel>>) {
 
     val lazyPagingItems = pager.collectAsLazyPagingItems()
 
@@ -36,17 +32,8 @@ fun GamesList(pager: Flow<PagingData<Game>>) {
             }
         }
 
-        itemsIndexed(lazyPagingItems) { index, item ->
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            ) {
-                Text(
-                    text = "$index: ${item?.name}", fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
+        itemsIndexed(lazyPagingItems) { _, item ->
+            item?.let { GameListItem(game = item) }
         }
 
         if (lazyPagingItems.loadState.append == LoadState.Loading) {
