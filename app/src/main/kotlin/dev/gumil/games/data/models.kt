@@ -20,9 +20,6 @@ data class Game(
     @Json(name = "first_release_date")
     val firstReleaseDate: Long,
 
-    @Json(name = "genres")
-    val genres: List<FieldName>,
-
     @Json(name = "name")
     val name: String,
 
@@ -43,6 +40,9 @@ data class Game(
 
     @Json(name = "storyline")
     val storyline: String?,
+
+    @Json(name = "genres")
+    val genres: List<FieldName>?,
 
     @Json(name = "themes")
     val themes: List<FieldName>?,

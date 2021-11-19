@@ -85,16 +85,6 @@
       "image_id": "co48pg"
     },
     "first_release_date": 1637020800,
-    "genres": [
-      {
-        "id": 9,
-        "name": "Puzzle"
-      },
-      {
-        "id": 31,
-        "name": "Adventure"
-      }
-    ],
     "name": "The lorem game",
     "platforms": [
       {

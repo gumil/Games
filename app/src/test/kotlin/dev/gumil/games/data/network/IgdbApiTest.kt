@@ -29,6 +29,7 @@ class IgdbApiTest {
             game,
             game.copy(
                 storyline = null,
+                genres = null,
                 themes = null,
                 gameModes = null,
                 gameEngines = null,
