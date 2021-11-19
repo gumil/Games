@@ -1,5 +1,6 @@
 package dev.gumil.games.data.db
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -16,4 +17,7 @@ interface GameDao {
 
     @Query("DELETE FROM game")
     suspend fun clearAll()
+
+    @Query("SELECT * FROM game")
+    fun getPagedGames(): PagingSource<Int, Game>
 }

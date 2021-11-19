@@ -86,6 +86,54 @@ class GameDaoTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun insert_games_and_refresh_pager() = runBlocking {
+        val game1 = game(32)
+        val game2 = game(1)
+        val game3 = game(64)
+
+        val expected = PagingSource.LoadResult.Page(
+            data = listOf(game1),
+            nextKey = 1,
+            prevKey = null,
+            itemsBefore = 0,
+            itemsAfter = 2
+        )
+
+        gameDao.insert(listOf(game1, game2, game3))
+        val actual = gameDao.getPagedGames().load(
+            PagingSource.LoadParams.Refresh(
+                null,
+                1,
+                false
+            )
+        )
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun insert_games_and_append_pager() = runBlocking {
+        val game = game()
+
+        val expected = PagingSource.LoadResult.Page(
+            data = listOf(game),
+            nextKey = 2,
+            prevKey = 1
+        )
+
+        gameDao.insert(listOf(game(), game, game(), game()))
+        val actual = gameDao.getPagedGames().load(
+            PagingSource.LoadParams.Append(
+                1,
+                1,
+                false
+            )
+        )
+
+        assertEquals(expected, actual)
+    }
+
     @After
     fun closeDb() {
         db.close()
