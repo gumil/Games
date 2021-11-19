@@ -35,7 +35,10 @@ class GameRemoteMediator(
                         ?: return MediatorResult.Success(
                             endOfPaginationReached = true
                         )
-                    state.pages.size
+
+                    val current = state.pages.lastOrNull()?.data?.size ?: 0
+                    val prevKey = state.pages.lastOrNull()?.prevKey ?: 0
+                    current + prevKey
                 }
             }
 
