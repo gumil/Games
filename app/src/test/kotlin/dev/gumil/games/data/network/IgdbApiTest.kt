@@ -44,7 +44,7 @@ class IgdbApiTest {
     }
 
     private fun game() = Game(
-        id = 134161,
+        id = "134161",
         cover = GameImage(
             imageId = "co48pg"
         ),

@@ -1,6 +1,7 @@
 package dev.gumil.games.data.db
 
 import android.content.Context
+import androidx.paging.PagingSource
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import dev.gumil.games.data.Game
@@ -19,10 +20,12 @@ class GameDaoTest {
 
     @Test
     fun insert_a_game_and_get_all_games() = runBlocking {
-        val game = game()
-        val expected = listOf(game)
+        val game1 = game(32)
+        val game2 = game(1)
+        val game3 = game(64)
+        val expected = listOf(game1, game2, game3)
 
-        gameDao.insert(listOf(game))
+        gameDao.insert(listOf(game1, game2, game3))
         val actual = gameDao.getAllGames()
 
         assertEquals(expected, actual)

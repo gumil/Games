@@ -11,7 +11,7 @@ import com.squareup.moshi.JsonClass
 data class Game(
     @PrimaryKey
     @Json(name = "id")
-    val id: Int,
+    val id: String,
 
     @Embedded(prefix = "cover")
     @Json(name = "cover")

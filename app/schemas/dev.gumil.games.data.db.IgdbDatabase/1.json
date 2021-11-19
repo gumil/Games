@@ -2,16 +2,16 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4f24443a6927b76f748bbbf8163da48e",
+    "identityHash": "d1fc0ad3b8451a48c845c95950f154e3",
     "entities": [
       {
         "tableName": "Game",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `firstReleaseDate` INTEGER NOT NULL, `gameModes` TEXT, `gameEngines` TEXT, `genres` TEXT NOT NULL, `involvedCompanies` TEXT, `name` TEXT NOT NULL, `platforms` TEXT NOT NULL, `playerPerspectives` TEXT, `screenshots` TEXT NOT NULL, `storyline` TEXT, `summary` TEXT NOT NULL, `themes` TEXT, `totalRating` REAL NOT NULL, `url` TEXT NOT NULL, `videos` TEXT, `coverimageId` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `firstReleaseDate` INTEGER NOT NULL, `genres` TEXT NOT NULL, `name` TEXT NOT NULL, `platforms` TEXT NOT NULL, `screenshots` TEXT NOT NULL, `summary` TEXT NOT NULL, `totalRating` REAL NOT NULL, `url` TEXT NOT NULL, `storyline` TEXT, `themes` TEXT, `gameModes` TEXT, `gameEngines` TEXT, `involvedCompanies` TEXT, `playerPerspectives` TEXT, `videos` TEXT, `coverimageId` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -21,28 +21,10 @@
             "notNull": true
           },
           {
-            "fieldPath": "gameModes",
-            "columnName": "gameModes",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "gameEngines",
-            "columnName": "gameEngines",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "genres",
             "columnName": "genres",
             "affinity": "TEXT",
             "notNull": true
-          },
-          {
-            "fieldPath": "involvedCompanies",
-            "columnName": "involvedCompanies",
-            "affinity": "TEXT",
-            "notNull": false
           },
           {
             "fieldPath": "name",
@@ -57,34 +39,16 @@
             "notNull": true
           },
           {
-            "fieldPath": "playerPerspectives",
-            "columnName": "playerPerspectives",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "screenshots",
             "columnName": "screenshots",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "storyline",
-            "columnName": "storyline",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "summary",
             "columnName": "summary",
             "affinity": "TEXT",
             "notNull": true
-          },
-          {
-            "fieldPath": "themes",
-            "columnName": "themes",
-            "affinity": "TEXT",
-            "notNull": false
           },
           {
             "fieldPath": "totalRating",
@@ -97,6 +61,42 @@
             "columnName": "url",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "storyline",
+            "columnName": "storyline",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "themes",
+            "columnName": "themes",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gameModes",
+            "columnName": "gameModes",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gameEngines",
+            "columnName": "gameEngines",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "involvedCompanies",
+            "columnName": "involvedCompanies",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "playerPerspectives",
+            "columnName": "playerPerspectives",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "videos",
@@ -124,7 +124,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4f24443a6927b76f748bbbf8163da48e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd1fc0ad3b8451a48c845c95950f154e3')"
     ]
   }
 }

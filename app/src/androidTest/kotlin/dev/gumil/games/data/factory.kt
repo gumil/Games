@@ -2,8 +2,10 @@ package dev.gumil.games.data
 
 import kotlin.random.Random
 
-fun game() = Game(
-    id = Random.nextInt(),
+fun game(
+    id: Int = Random.nextInt()
+) = Game(
+    id = "$id",
     cover = GameImage(
         imageId = "${Random.nextInt()}"
     ),
