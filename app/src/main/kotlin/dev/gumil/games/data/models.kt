@@ -74,7 +74,7 @@ data class GamePlatform(
     @Json(name = "name")
     val name: String,
     @Json(name = "platform_logo")
-    val platformLogo: GameImage
+    val platformLogo: GameImage?
 )
 
 @JsonClass(generateAdapter = true)
@@ -92,7 +92,7 @@ data class GameImage(
 @JsonClass(generateAdapter = true)
 data class GameVideo(
     @Json(name = "name")
-    val name: String,
+    val name: String?,
     @Json(name = "video_id")
     val videoId: String
 )
