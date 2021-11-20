@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import dev.gumil.games.data.Game
 import dev.gumil.games.data.game
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -141,9 +143,11 @@ class GameDaoTest {
         val game = game(id)
 
         gameDao.insert(listOf(game(), game, game(), game()))
-        val actual = gameDao.getGame(id.toString())
-
-        assertEquals(game, actual)
+        gameDao.getGame(id.toString())
+            .take(1)
+            .collect { actual ->
+                assertEquals(game, actual)
+            }
     }
 
     @After

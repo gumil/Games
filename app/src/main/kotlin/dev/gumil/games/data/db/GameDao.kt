@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import dev.gumil.games.data.Game
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GameDao {
@@ -22,5 +23,5 @@ interface GameDao {
     fun getPagedGames(): PagingSource<Int, Game>
 
     @Query("SELECT * FROM game WHERE id = :id")
-    suspend fun getGame(id: String): Game
+    fun getGame(id: String): Flow<Game>
 }

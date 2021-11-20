@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 interface GamesRepository {
     fun getPagedPopularGamesFlow(): Flow<PagingData<Game>>
-    suspend fun getGame(id: String): Game
+    fun getGame(id: String): Flow<Game>
 }
 
 @OptIn(ExperimentalPagingApi::class)
@@ -32,7 +32,7 @@ class GamesRepositoryImpl @Inject constructor(
         db.gameDao().getPagedGames()
     }.flow
 
-    override suspend fun getGame(id: String): Game {
+    override fun getGame(id: String): Flow<Game> {
         return db.gameDao().getGame(id)
     }
 }

@@ -4,6 +4,8 @@ import dev.gumil.games.data.Game
 import dev.gumil.games.data.db.GameDao
 import dev.gumil.games.data.db.IgdbDatabase
 import dev.gumil.games.data.network.IgdbApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -23,10 +25,11 @@ class GamesRepositoryImplTest {
         val dao = mock<GameDao>()
 
         whenever(db.gameDao()).thenReturn(dao)
-        whenever(db.gameDao().getGame(id)).thenReturn(expected)
+        whenever(db.gameDao().getGame(id)).thenReturn(flowOf(expected))
 
-        val actual = repository.getGame(id)
-
-        assertEquals(expected, actual)
+        repository.getGame(id)
+            .collect { actual ->
+                assertEquals(expected, actual)
+            }
     }
 }
