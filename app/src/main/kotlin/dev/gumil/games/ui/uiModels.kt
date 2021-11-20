@@ -90,9 +90,9 @@ fun Game.mapToDetailModel(): GameUiModel {
         bottomSections = listOf(
             storyline?.let { SectionUi("Storyline", it) },
             themes?.toSectionUi("Themes"),
-            gameModes?.toSectionUi("Themes"),
-            playerPerspectives?.toSectionUi("Themes"),
-            gameEngines?.toSectionUi("Themes")
+            gameModes?.toSectionUi("Game Modes"),
+            playerPerspectives?.toSectionUi("Player Perspective"),
+            gameEngines?.toSectionUi("Game Engines")
         )
     )
 }
