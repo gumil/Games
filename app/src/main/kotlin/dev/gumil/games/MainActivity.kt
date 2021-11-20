@@ -4,9 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,8 +45,11 @@ class MainActivity : ComponentActivity() {
 
         NavHost(navController = navController, startDestination = "list") {
             composable("list") {
-                GamesListScreen(pager = viewModel.pagedGames) { id ->
-                    navController.navigate("detail/$id")
+                Column {
+                    Toolbar()
+                    GamesListScreen(pager = viewModel.pagedGames) { id ->
+                        navController.navigate("detail/$id")
+                    }
                 }
             }
             composable(
@@ -54,5 +62,18 @@ class MainActivity : ComponentActivity() {
                 } ?: navController.navigateUp()
             }
         }
+    }
+
+    @Composable
+    private fun Toolbar() {
+        TopAppBar(
+            title = {
+                Text(
+                    text = stringResource(id = R.string.app_name),
+                    color = Color.White
+                )
+            },
+            backgroundColor = MaterialTheme.colors.primary
+        )
     }
 }
