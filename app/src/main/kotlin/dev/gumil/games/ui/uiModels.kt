@@ -1,19 +1,22 @@
 package dev.gumil.games.ui
 
 import dev.gumil.games.data.Game
-import java.util.Date
 
 data class GameUiModel(
     val name: String,
     val cover: ImageUrl,
-    val firstReleaseDate: Date,
-    val platforms: List<ImageUrl>,
+    val firstReleaseDate: String,
+    val totalRating: Int,
+    /**
+     * Genres, Platforms, Companies, Summary
+     */
+    val topSections: List<SectionUi>,
     val screenshots: List<ImageUrl>,
-    val summary: String,
-    val totalRating: Double,
     val url: String,
-    val storyline: String? = null,
-    val sections: List<SectionUi>? = null,
+    /**
+     * Storyline, Themes, GameMode, PlayerPerspective, GameEngine
+     */
+    val bottomSections: List<SectionUi>? = null,
     val videos: List<VideoUrl>? = null
 )
 
@@ -38,7 +41,7 @@ data class ImageUrl(
 data class VideoUrl(
     val name: String,
     val url: String,
-    val thumbnailUrl: String
+    val videoUrl: String
 )
 
 data class CommaSeparatedStrings(
