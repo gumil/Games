@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import dev.gumil.games.ui.CommaSeparatedStrings
 import dev.gumil.games.ui.GameListUiModel
-import dev.gumil.games.ui.NamedUrl
+import dev.gumil.games.ui.ImageUrl
 import dev.gumil.games.ui.common.RatingCircle
 import dev.gumil.games.ui.theme.GamesTheme
 
@@ -106,7 +106,7 @@ private fun GameListItemPreview() {
     val model = GameListUiModel(
         id = "1234",
         name = "Super Game",
-        listPreview = NamedUrl("preview", "url"),
+        listPreview = ImageUrl("preview", "url"),
         totalRating = 88,
         platforms = CommaSeparatedStrings(listOf("Playstation 88", "Nintendo sWiitch"))
     )

@@ -1,27 +1,26 @@
 package dev.gumil.games.ui
 
 import dev.gumil.games.data.Game
-import dev.gumil.games.data.GameVideo
 import java.util.Date
 
 data class GameUiModel(
     val name: String,
-    val cover: NamedUrl,
+    val cover: ImageUrl,
     val firstReleaseDate: Date,
-    val platforms: List<NamedUrl>,
-    val screenshots: List<NamedUrl>,
+    val platforms: List<ImageUrl>,
+    val screenshots: List<ImageUrl>,
     val summary: String,
     val totalRating: Double,
     val url: String,
     val storyline: String? = null,
     val sections: List<SectionUi>? = null,
-    val videos: List<GameVideo>? = null
+    val videos: List<VideoUrl>? = null
 )
 
 data class GameListUiModel(
     val id: String,
     val name: String,
-    val listPreview: NamedUrl,
+    val listPreview: ImageUrl,
     val totalRating: Int,
     val platforms: CommaSeparatedStrings
 )
@@ -31,9 +30,15 @@ data class SectionUi(
     val detail: String
 )
 
-data class NamedUrl(
+data class ImageUrl(
     val name: String,
     val url: String
+)
+
+data class VideoUrl(
+    val name: String,
+    val url: String,
+    val thumbnailUrl: String
 )
 
 data class CommaSeparatedStrings(
@@ -57,7 +62,7 @@ fun Game.mapToListModel(): GameListUiModel {
     return GameListUiModel(
         id = id,
         name = name,
-        listPreview = NamedUrl(name, GameImageSize.LIST.getImageUrl(cover.imageId)),
+        listPreview = ImageUrl(name, GameImageSize.LIST.getImageUrl(cover.imageId)),
         totalRating = totalRating.toInt(),
         platforms = CommaSeparatedStrings(platforms.map { it.name })
     )
