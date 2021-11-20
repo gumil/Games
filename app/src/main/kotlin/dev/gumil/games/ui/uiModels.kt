@@ -66,11 +66,12 @@ fun Game.mapToListModel(): GameListUiModel {
     )
 }
 
+@Suppress("MagicNumber")
 fun Game.mapToDetailModel(): GameUiModel {
     return GameUiModel(
         id = id,
         name = name,
-        firstReleaseDate = Date(firstReleaseDate),
+        firstReleaseDate = Date(firstReleaseDate * 1000), // Converted to milliseconds
         cover = ImageUrl(name, GameImageSize.COVER.getImageUrl(cover.imageId)),
         totalRating = totalRating.toInt(),
         url = url,
