@@ -24,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import dev.gumil.games.ui.CommaSeparatedStrings
 import dev.gumil.games.ui.GameListUiModel
 import dev.gumil.games.ui.ImageUrl
 import dev.gumil.games.ui.common.RatingCircle
@@ -86,7 +85,7 @@ private fun ListItemContent(
                 style = MaterialTheme.typography.h5
             )
             Text(
-                text = game.platforms.toString(),
+                text = game.platforms,
                 color = Color.White,
                 style = MaterialTheme.typography.subtitle2
             )
@@ -108,7 +107,7 @@ private fun GameListItemPreview() {
         name = "Super Game",
         listPreview = ImageUrl("preview", "url"),
         totalRating = 88,
-        platforms = CommaSeparatedStrings(listOf("Playstation 88", "Nintendo sWiitch"))
+        platforms = "Playstation 88, Nintendo sWiitch"
     )
 
     GamesTheme {

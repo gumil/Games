@@ -23,6 +23,8 @@ import dev.gumil.games.ui.ImageUrl
 import dev.gumil.games.ui.SectionUi
 import dev.gumil.games.ui.common.RatingCircle
 import dev.gumil.games.ui.theme.GamesTheme
+import java.text.DateFormat
+import java.util.Date
 
 @Composable
 fun GameDetailScreen(game: GameUiModel) {
@@ -71,17 +73,17 @@ private fun ContentDetails(
         )
 
         Text(
-            text = game.firstReleaseDate,
+            text = DateFormat.getDateInstance().format(game.firstReleaseDate),
             style = MaterialTheme.typography.h6
         )
 
-        game.topSections.forEach { section ->
+        game.topSections.filterNotNull().forEach { section ->
             SectionText(section, modifier = Modifier.padding(vertical = 8.dp))
         }
 
         SectionImage(title = "Screenshots", images = game.screenshots)
 
-        game.bottomSections?.forEach { section ->
+        game.bottomSections.filterNotNull().forEach { section ->
             SectionText(section, modifier = Modifier.padding(vertical = 8.dp))
         }
     }
@@ -95,9 +97,10 @@ private fun GameDetailScreenPreview() {
         Surface(color = MaterialTheme.colors.background) {
             GameDetailScreen(
                 GameUiModel(
+                    id = "1234",
                     name = "Super Game",
                     cover = ImageUrl("cover", "url"),
-                    firstReleaseDate = "31 Dec 2021",
+                    firstReleaseDate = Date(),
                     totalRating = 88,
                     topSections = listOf(
                         SectionUi(

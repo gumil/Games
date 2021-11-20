@@ -1,22 +1,25 @@
 package dev.gumil.games.ui
 
+import dev.gumil.games.data.FieldName
 import dev.gumil.games.data.Game
+import java.util.Date
 
 data class GameUiModel(
+    val id: String,
     val name: String,
     val cover: ImageUrl,
-    val firstReleaseDate: String,
+    val firstReleaseDate: Date,
     val totalRating: Int,
     /**
      * Genres, Platforms, Companies, Summary
      */
-    val topSections: List<SectionUi>,
+    val topSections: List<SectionUi?>,
     val screenshots: List<ImageUrl>,
     val url: String,
     /**
      * Storyline, Themes, GameMode, PlayerPerspective, GameEngine
      */
-    val bottomSections: List<SectionUi>? = null,
+    val bottomSections: List<SectionUi?>,
     val videos: List<VideoUrl>? = null
 )
 
@@ -25,7 +28,7 @@ data class GameListUiModel(
     val name: String,
     val listPreview: ImageUrl,
     val totalRating: Int,
-    val platforms: CommaSeparatedStrings
+    val platforms: String
 )
 
 data class SectionUi(
@@ -44,14 +47,6 @@ data class VideoUrl(
     val videoUrl: String
 )
 
-data class CommaSeparatedStrings(
-    val strings: List<String>
-) {
-    override fun toString(): String {
-        return strings.joinToString()
-    }
-}
-
 enum class GameImageSize(
     val size: String
 ) {
@@ -67,10 +62,43 @@ fun Game.mapToListModel(): GameListUiModel {
         name = name,
         listPreview = ImageUrl(name, GameImageSize.LIST.getImageUrl(cover.imageId)),
         totalRating = totalRating.toInt(),
-        platforms = CommaSeparatedStrings(platforms.map { it.name })
+        platforms = platforms.joinToString { it.name }
+    )
+}
+
+fun Game.mapToDetailModel(): GameUiModel {
+    return GameUiModel(
+        id = id,
+        name = name,
+        firstReleaseDate = Date(firstReleaseDate),
+        cover = ImageUrl(name, GameImageSize.COVER.getImageUrl(cover.imageId)),
+        totalRating = totalRating.toInt(),
+        url = url,
+        topSections = listOf(
+            genres?.toSectionUi("Genres"),
+            platforms
+                .map { FieldName(it.name) }
+                .toSectionUi("Platforms"),
+            involvedCompanies
+                ?.map { it.company }
+                ?.toSectionUi("Companies"),
+            SectionUi("Summary", summary)
+        ),
+        screenshots = screenshots.map { image ->
+            ImageUrl("screenshot", GameImageSize.SCREENSHOTS.getImageUrl(image.imageId))
+        },
+        bottomSections = listOf(
+            storyline?.let { SectionUi("Storyline", it) },
+            themes?.toSectionUi("Themes"),
+            gameModes?.toSectionUi("Themes"),
+            playerPerspectives?.toSectionUi("Themes"),
+            gameEngines?.toSectionUi("Themes")
+        )
     )
 }
 
 fun GameImageSize.getImageUrl(
     hash: String
 ) = "https://images.igdb.com/igdb/image/upload/t_$size/$hash.jpg"
+
+fun List<FieldName>.toSectionUi(title: String) = SectionUi(title, joinToString { it.name })
