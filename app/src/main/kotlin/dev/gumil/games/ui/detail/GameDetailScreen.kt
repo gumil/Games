@@ -18,7 +18,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import dev.gumil.games.R
 import dev.gumil.games.ui.GameUiModel
 import dev.gumil.games.ui.ImageUrl
 import dev.gumil.games.ui.SectionUi
@@ -52,13 +51,10 @@ private fun ContentHeader(game: GameUiModel) {
     Box {
         Image(
             painter = rememberImagePainter(
-                data = game.cover.url,
-                builder = {
-                    placeholder(R.drawable.ic_launcher_background)
-                }
+                data = game.cover.url
             ),
             contentDescription = game.cover.name,
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(480.dp)
@@ -82,7 +78,6 @@ private fun ContentDetails(
             text = game.name,
             style = MaterialTheme.typography.h4
         )
-
         Text(
             text = DateFormat.getDateInstance().format(game.firstReleaseDate),
             style = MaterialTheme.typography.h6
