@@ -40,7 +40,7 @@ interface IgdbApi {
                     videos.video_id;
                 where
                     first_release_date != null &
-                    first_release_date < 1637161259 &
+                    first_release_date < ${System.currentTimeMillis()} &
                     total_rating > 70 &
                     total_rating_count > 5 &
                     parent_game = null;
