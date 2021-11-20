@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -23,11 +24,21 @@ import dev.gumil.games.ui.ImageUrl
 import dev.gumil.games.ui.SectionUi
 import dev.gumil.games.ui.common.RatingCircle
 import dev.gumil.games.ui.theme.GamesTheme
+import kotlinx.coroutines.flow.Flow
 import java.text.DateFormat
 import java.util.Date
 
 @Composable
-fun GameDetailScreen(game: GameUiModel) {
+fun GameDetailScreen(game: Flow<GameUiModel>) {
+    val state = game.collectAsState(initial = null)
+
+    state.value?.let { gameModel ->
+        GameDetailScreen(game = gameModel)
+    }
+}
+
+@Composable
+private fun GameDetailScreen(game: GameUiModel) {
     LazyColumn {
         item {
             ContentHeader(game)

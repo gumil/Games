@@ -2,6 +2,7 @@ package dev.gumil.games.ui.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,7 +34,8 @@ import dev.gumil.games.ui.theme.GamesTheme
 @Suppress("MagicNumber")
 fun GameListItem(
     game: GameListUiModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateToDetailScreen: (gameId: String) -> Unit
 ) {
     var sizeImage by remember { mutableStateOf(IntSize.Zero) }
 
@@ -47,6 +49,9 @@ fun GameListItem(
         modifier = modifier
             .fillMaxWidth()
             .height(200.dp)
+            .clickable {
+                navigateToDetailScreen(game.id)
+            }
     ) {
         Image(
             painter = rememberImagePainter(game.listPreview.url),
@@ -111,6 +116,6 @@ private fun GameListItemPreview() {
     )
 
     GamesTheme {
-        GameListItem(game = model)
+        GameListItem(game = model) { }
     }
 }
