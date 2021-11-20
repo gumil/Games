@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             GamesTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    GamesList(pager = viewModel.games)
+                    GamesList(pager = viewModel.pagedGames)
                 }
             }
         }

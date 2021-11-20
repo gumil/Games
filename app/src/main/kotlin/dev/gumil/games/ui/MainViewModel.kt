@@ -14,7 +14,7 @@ class MainViewModel @Inject constructor(
     private val repository: GamesRepository
 ) : ViewModel() {
 
-    val games by lazy {
+    val pagedGames by lazy {
         repository
             .getPagedPopularGamesFlow()
             .map { data ->

@@ -73,7 +73,7 @@ class MainViewModelTest {
         )
 
         val job = launch {
-            viewModel.games.collectLatest { pagingData ->
+            viewModel.pagedGames.collectLatest { pagingData ->
                 differ.submitData(pagingData)
             }
         }
