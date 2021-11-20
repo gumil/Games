@@ -2,9 +2,10 @@ package dev.gumil.games.ui.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -43,16 +44,22 @@ fun SectionImage(
     modifier: Modifier = Modifier
 ) {
     SectionDetail(
-        title = title,
-        modifier = modifier.height(200.dp)
+        title = title
     ) {
-        Spacer(modifier = Modifier.height(8.dp))
-        LazyRow {
+        LazyRow(
+            modifier = modifier
+                .fillMaxWidth()
+        ) {
             item {
                 images.forEach { image ->
                     Image(
-                        painter = rememberImagePainter(data = image.url),
-                        contentDescription = image.name
+                        painter = rememberImagePainter(
+                            data = image.url,
+                        ),
+                        contentDescription = image.name,
+                        modifier = Modifier
+                            .size(height = 320.dp, width = 569.dp)
+                            .padding(8.dp)
                     )
                 }
             }

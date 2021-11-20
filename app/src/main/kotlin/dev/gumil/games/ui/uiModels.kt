@@ -50,10 +50,9 @@ data class VideoUrl(
 enum class GameImageSize(
     val size: String
 ) {
-    THUMB("thumb_2x"),
     LIST("screenshot_big"),
     COVER("cover_big_2x"),
-    SCREENSHOTS("720p")
+    SCREENSHOTS("screenshot_big")
 }
 
 fun Game.mapToListModel(): GameListUiModel {
