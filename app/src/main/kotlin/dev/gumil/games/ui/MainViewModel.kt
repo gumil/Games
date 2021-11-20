@@ -22,4 +22,7 @@ class MainViewModel @Inject constructor(
             }
             .cachedIn(viewModelScope)
     }
+
+    fun getGame(id: String) = repository.getGame(id)
+        .map { it.mapToDetailModel() }
 }

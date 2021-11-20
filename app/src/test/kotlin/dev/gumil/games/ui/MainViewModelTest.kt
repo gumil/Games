@@ -8,9 +8,11 @@ import dev.gumil.games.data.Game
 import dev.gumil.games.data.repository.GamesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
@@ -21,6 +23,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
+import kotlin.random.Random
 
 @ExperimentalCoroutinesApi
 class MainViewModelTest {
@@ -83,6 +86,18 @@ class MainViewModelTest {
         assertEquals(expected, differ.snapshot().toList())
 
         job.cancel()
+    }
+
+    @Test
+    fun `listen to get game flow and map to uimodel`() = runBlocking {
+        val id = "${Random.nextInt()}"
+        val game = Game()
+        val expected = game.mapToDetailModel()
+        whenever(repository.getGame(id)).thenReturn(flowOf(game))
+
+        viewModel.getGame(id).collect { actual ->
+            assertEquals(expected, actual)
+        }
     }
 
     @After
