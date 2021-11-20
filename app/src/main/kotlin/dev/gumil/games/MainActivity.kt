@@ -13,7 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
-import dev.gumil.games.ui.GamesList
+import dev.gumil.games.ui.GamesListScreen
 import dev.gumil.games.ui.MainViewModel
 import dev.gumil.games.ui.detail.GameDetailScreen
 import dev.gumil.games.ui.theme.GamesTheme
@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
         NavHost(navController = navController, startDestination = "list") {
             composable("list") {
-                GamesList(pager = viewModel.pagedGames) { id ->
+                GamesListScreen(pager = viewModel.pagedGames) { id ->
                     navController.navigate("detail/$id")
                 }
             }

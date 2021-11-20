@@ -12,31 +12,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dev.gumil.games.ui.list.GameListItem
 import kotlinx.coroutines.flow.Flow
 
 @Composable
-fun GamesList(
+fun GamesListScreen(
     pager: Flow<PagingData<GameListUiModel>>,
     navigateToDetailScreen: (gameId: String) -> Unit
 ) {
-
     val lazyPagingItems = pager.collectAsLazyPagingItems()
-
-    LazyColumn {
-        if (lazyPagingItems.loadState.refresh == LoadState.Loading) {
-            item {
-                Text(
-                    text = "Waiting for items to load from the backend",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.CenterHorizontally)
-                )
-            }
+    val isRefreshing = lazyPagingItems.loadState.refresh == LoadState.Loading
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing),
+        onRefresh = {
+            lazyPagingItems.refresh()
         }
+    ) {
+        GamesList(lazyPagingItems, navigateToDetailScreen)
+    }
+}
 
+@Composable
+private fun GamesList(
+    lazyPagingItems: LazyPagingItems<GameListUiModel>,
+    navigateToDetailScreen: (gameId: String) -> Unit
+) {
+    LazyColumn {
         itemsIndexed(lazyPagingItems) { _, item ->
             item?.let {
                 GameListItem(
