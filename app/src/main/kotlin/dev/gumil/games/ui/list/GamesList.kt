@@ -1,4 +1,4 @@
-package dev.gumil.games.ui
+package dev.gumil.games.ui.list
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,7 +16,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import dev.gumil.games.ui.list.GameListItem
+import dev.gumil.games.ui.GameListUiModel
 import kotlinx.coroutines.flow.Flow
 
 @Composable
