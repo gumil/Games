@@ -110,7 +110,7 @@ private fun GameListItemPreview() {
     val model = GameListUiModel(
         id = "1234",
         name = "Super Game",
-        listPreview = ImageUrl("preview", "url"),
+        listPreview = ImageUrl("url"),
         totalRating = 88,
         platforms = "Playstation 88, Nintendo sWiitch"
     )

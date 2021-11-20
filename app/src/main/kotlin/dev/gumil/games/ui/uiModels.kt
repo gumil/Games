@@ -20,7 +20,7 @@ data class GameUiModel(
      * Storyline, Themes, GameMode, PlayerPerspective, GameEngine
      */
     val bottomSections: List<SectionUi?>,
-    val videos: List<VideoUrl>? = null
+    val videos: List<ImageUrl>? = null
 )
 
 data class GameListUiModel(
@@ -37,14 +37,9 @@ data class SectionUi(
 )
 
 data class ImageUrl(
-    val name: String,
-    val url: String
-)
-
-data class VideoUrl(
-    val name: String,
     val url: String,
-    val videoUrl: String
+    val name: String? = null,
+    val videoUrl: String? = null
 )
 
 enum class GameImageSize(
@@ -59,7 +54,7 @@ fun Game.mapToListModel(): GameListUiModel {
     return GameListUiModel(
         id = id,
         name = name,
-        listPreview = ImageUrl(name, GameImageSize.LIST.getImageUrl(cover.imageId)),
+        listPreview = ImageUrl(url = GameImageSize.LIST.getImageUrl(cover.imageId)),
         totalRating = totalRating.toInt(),
         platforms = platforms.joinToString { it.name }
     )
@@ -71,7 +66,7 @@ fun Game.mapToDetailModel(): GameUiModel {
         id = id,
         name = name,
         firstReleaseDate = Date(firstReleaseDate * 1000), // Converted to milliseconds
-        cover = ImageUrl(name, GameImageSize.COVER.getImageUrl(cover.imageId)),
+        cover = ImageUrl(url = GameImageSize.COVER.getImageUrl(cover.imageId)),
         totalRating = totalRating.toInt(),
         url = url,
         topSections = listOf(
@@ -85,7 +80,7 @@ fun Game.mapToDetailModel(): GameUiModel {
             SectionUi("Summary", summary)
         ),
         screenshots = screenshots.map { image ->
-            ImageUrl("screenshot", GameImageSize.SCREENSHOTS.getImageUrl(image.imageId))
+            ImageUrl(url = GameImageSize.SCREENSHOTS.getImageUrl(image.imageId))
         },
         bottomSections = listOf(
             storyline?.let { SectionUi("Storyline", it) },
@@ -93,7 +88,14 @@ fun Game.mapToDetailModel(): GameUiModel {
             gameModes?.toSectionUi("Game Modes"),
             playerPerspectives?.toSectionUi("Player Perspective"),
             gameEngines?.toSectionUi("Game Engines")
-        )
+        ),
+        videos = videos?.map { video ->
+            ImageUrl(
+                url = "https://i.ytimg.com/vi/${video.videoId}/hq720.jpg",
+                name = video.name,
+                videoUrl = "https://www.youtube.com/watch?v=${video.videoId}"
+            )
+        }
     )
 }
 

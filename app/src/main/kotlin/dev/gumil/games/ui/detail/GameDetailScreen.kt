@@ -108,6 +108,10 @@ private fun ContentDetails(
         game.bottomSections.filterNotNull().forEach { section ->
             SectionText(section, modifier = Modifier.padding(vertical = 8.dp))
         }
+
+        game.videos?.let { videos ->
+            SectionImage(title = "Videos", images = videos)
+        }
     }
 }
 
@@ -121,7 +125,7 @@ private fun GameDetailScreenPreview() {
                 GameUiModel(
                     id = "1234",
                     name = "Super Game",
-                    cover = ImageUrl("cover", "url"),
+                    cover = ImageUrl("url"),
                     firstReleaseDate = Date(),
                     totalRating = 88,
                     topSections = listOf(
