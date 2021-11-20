@@ -34,6 +34,7 @@ fun RatingCircle(
         )
         Text(
             text = rating.toString(),
+            color = Color.Black,
             fontWeight = FontWeight.Black,
             fontSize = 16.sp,
             modifier = Modifier.align(Alignment.Center)
