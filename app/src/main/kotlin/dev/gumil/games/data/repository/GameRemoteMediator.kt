@@ -1,5 +1,6 @@
 package dev.gumil.games.data.repository
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -31,11 +32,6 @@ class GameRemoteMediator(
                     return MediatorResult.Success(endOfPaginationReached = true)
                 }
                 LoadType.APPEND -> {
-                    state.lastItemOrNull()
-                        ?: return MediatorResult.Success(
-                            endOfPaginationReached = true
-                        )
-
                     val current = state.pages.lastOrNull()?.data?.size ?: 0
                     val prevKey = state.pages.lastOrNull()?.prevKey ?: 0
                     current + prevKey

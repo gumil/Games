@@ -95,19 +95,6 @@ class GameRemoteMediatorTest {
     }
 
     @Test
-    fun append_when_last_item_is_null() = runBlocking {
-        val pagingState = PagingState<Int, Game>(
-            listOf(),
-            null,
-            PagingConfig(1),
-            1
-        )
-        val result = remoteMediator.load(LoadType.APPEND, pagingState)
-        assertTrue(result is RemoteMediator.MediatorResult.Success)
-        assertTrue((result as RemoteMediator.MediatorResult.Success).endOfPaginationReached)
-    }
-
-    @Test
     fun append_when_last_item_is_not_null_appends_list() = runBlocking {
         val previousGames = listOf(game(), game())
 
