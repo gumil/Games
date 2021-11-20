@@ -13,6 +13,12 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dev.gumil.games.ui.GameListUiModel
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * For some reason detekt does not believe this is correct
+ */
+@Suppress("TopLevelPropertyNaming")
+private const val SIZE_PLACEHOLDER = 4
+
 @Composable
 fun GamesListScreen(
     pager: Flow<PagingData<GameListUiModel>>,
@@ -28,7 +34,7 @@ fun GamesListScreen(
     ) {
         if (lazyPagingItems.itemCount == 0 && !isRefreshing) {
             Column {
-                repeat(4) {
+                repeat(SIZE_PLACEHOLDER) {
                     Placeholder()
                 }
             }

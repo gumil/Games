@@ -18,9 +18,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
-import dev.gumil.games.ui.list.GamesListScreen
 import dev.gumil.games.ui.MainViewModel
 import dev.gumil.games.ui.detail.GameDetailScreen
+import dev.gumil.games.ui.list.GamesListScreen
 import dev.gumil.games.ui.theme.GamesTheme
 
 @AndroidEntryPoint
